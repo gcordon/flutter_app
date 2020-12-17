@@ -41,7 +41,7 @@ class _MyHomePageState extends State<MyHomePage> {
   List<BottomNavigationBarItem> bottomObj = [
     BottomNavigationBarItem(
       icon: Icon(Icons.home),
-      label: '首页',
+      label: '首页111',
     ),
     BottomNavigationBarItem(
       icon: Icon(Icons.business),
