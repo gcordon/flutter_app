@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
+import 'package:photo_view/photo_view.dart';
+import 'package:photo_view/photo_view_gallery.dart';
 // http://www.manongjc.com/detail/12-vygbisoqfuawzjl.html
+//https://pub.flutter-io.cn/
 
 void main() {
   runApp(MyApp());
@@ -41,7 +44,7 @@ class _MyHomePageState extends State<MyHomePage> {
   List<BottomNavigationBarItem> bottomObj = [
     BottomNavigationBarItem(
       icon: Icon(Icons.home),
-      label: '首页111',
+      label: '首页',
     ),
     BottomNavigationBarItem(
       icon: Icon(Icons.business),
@@ -81,7 +84,7 @@ class _MyHomePageState extends State<MyHomePage> {
             // tabbar切换
             Expanded(
               // height: 400,
-              child: TabBarDemo(),
+              child: IndexTabBar(),
               // child: BasicPage(),
             )
           ],
@@ -111,17 +114,37 @@ class _MyHomePageState extends State<MyHomePage> {
               fillColor: Color(0x30cccccc),
               filled: true,
               enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Color(0x00FF0000)),
-                  borderRadius: BorderRadius.all(Radius.circular(100))),
+                borderSide: BorderSide(
+                  color: Color(0x00FF0000),
+                ),
+                borderRadius: BorderRadius.all(
+                  Radius.circular(100),
+                ),
+              ),
               focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Color(0x00000000)),
-                  borderRadius: BorderRadius.all(Radius.circular(100))),
+                borderSide: BorderSide(
+                  color: Color(0x00000000),
+                ),
+                borderRadius: BorderRadius.all(
+                  Radius.circular(100),
+                ),
+              ),
               border: InputBorder.none,
               hintText: "$searchInput",
-              prefixIcon: Icon(Icons.search),
-              suffixIcon: Icon(Icons.linear_scale_rounded),
-              prefixStyle: TextStyle(color: Colors.white, fontSize: 14.0),
-              hintStyle: TextStyle(color: Colors.grey, fontSize: 14.0),
+              prefixIcon: Icon(
+                Icons.search,
+              ),
+              suffixIcon: Icon(
+                Icons.linear_scale_rounded,
+              ),
+              prefixStyle: TextStyle(
+                color: Colors.white,
+                fontSize: 14.0,
+              ),
+              hintStyle: TextStyle(
+                color: Colors.grey,
+                fontSize: 14.0,
+              ),
             ),
           ),
         ),
@@ -146,6 +169,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
+// easy refresh 使用例子参考
 class BasicPage extends StatefulWidget {
   @override
   _BasicPageState createState() => _BasicPageState();
@@ -199,13 +223,13 @@ class _BasicPageState extends State<BasicPage> {
   }
 }
 
-//
-class TabBarDemo extends StatefulWidget {
+//首页内容切换
+class IndexTabBar extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _TabBar();
 }
 
-class _TabBar extends State<TabBarDemo> {
+class _TabBar extends State<IndexTabBar> {
   TabController _controller;
   final List<String> _tabValues = [
     '动态',
@@ -229,9 +253,11 @@ class _TabBar extends State<TabBarDemo> {
         preferredSize: Size.fromHeight(40),
         child: AppBar(
           bottom: TabBar(
-            tabs: _tabValues.map((f) {
-              return Text(f);
-            }).toList(),
+            tabs: _tabValues.map(
+              (f) {
+                return Text(f);
+              },
+            ).toList(),
             controller: _controller,
             indicatorColor: Colors.green,
             indicatorSize: TabBarIndicatorSize.tab,
@@ -258,17 +284,6 @@ class _TabBar extends State<TabBarDemo> {
                         //ListView的Item
                         itemCount: 20,
                         itemBuilder: (BuildContext context, int index) {
-                          // return new Container(
-                          //   height: 350.0,
-                          //   child: Card(
-                          //     child: new Center(
-                          //       child: new Text(
-                          //         '111',
-                          //         style: new TextStyle(fontSize: 18.0),
-                          //       ),
-                          //     ),
-                          //   ),
-                          // );
                           return douListBox();
                           // return douListBox();
                         },
@@ -286,14 +301,27 @@ class _TabBar extends State<TabBarDemo> {
   }
 }
 
-// ignore: camel_case_types
+// 首页文章推荐
 class douListBox extends StatelessWidget {
   const douListBox({
     Key key,
   }) : super(key: key);
 
+  void tapThumbUp() {
+    print("点击了👍按钮");
+  }
+
+  void tapComments() {
+    print("点击了评论按钮");
+  }
+
+  void tapShare() {
+    print("点击了分享按钮");
+  }
+
   @override
   Widget build(BuildContext context) {
+    String thumbUpNumber = '99';
     return Container(
       color: Colors.black54,
       child: Column(
@@ -420,11 +448,18 @@ class douListBox extends StatelessWidget {
                     vertical: 10.0,
                     // horizontal: 8.0,
                   ),
-                  child: Text(
-                    "1920年，女性吸烟还是taboo，美国烟草公司聘请Bernays，力求拓展女性消费群体。Bernays的scenario是把吸烟跟女权结合起来，刚获得投票权没几年的女性很容易被“她们点燃的不是香烟，是自由”激发起情绪，理性败给情绪，Bernays的操作几乎就是如今的情绪化洗脑文案＋水军＋买热搜，效果却出奇的好，直接让lung cancer性别趋向平等了，1920年啊，互联网思维，PR吊炸天。",
-                    style: TextStyle(
-                      color: Colors.white54,
-                    ),
+                  child: Column(
+                    children: [
+                      // PhotoView(
+                      //   imageProvider: AssetImage("asserts/logo.png"),
+                      // ),
+                      Text(
+                        "1920年，女性吸烟还是taboo，美国烟草公司聘请Bernays，力求拓展女性消费群体。Bernays的scenario是把吸烟跟女权结合起来，刚获得投票权没几年的女性很容易被“她们点燃的不是香烟，是自由”激发起情绪，理性败给情绪，Bernays的操作几乎就是如今的情绪化洗脑文案＋水军＋买热搜，效果却出奇的好，直接让lung cancer性别趋向平等了，1920年啊，互联网思维，PR吊炸天。",
+                        style: TextStyle(
+                          color: Colors.white54,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
                 Container(
@@ -444,30 +479,21 @@ class douListBox extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.handyman_outlined,
-                              color: Colors.white54,
-                              size: 18,
-                            ),
-                            Text(
-                              "11",
-                              style: TextStyle(
-                                color: Colors.white54,
-                              ),
-                            ),
-                          ],
+                        //点赞
+                        iconWithTextAndTo(
+                          tapThumbUp,
+                          createArticleIcon(icon: Icons.thumb_up),
+                          thumbUpNumber,
                         ),
-                        Icon(
-                          Icons.message_outlined,
-                          color: Colors.white54,
-                          size: 18,
+                        iconWithTextAndTo(
+                          tapComments,
+                          createArticleIcon(icon: Icons.message_outlined),
+                          thumbUpNumber,
                         ),
-                        Icon(
-                          Icons.share_outlined,
-                          color: Colors.white54,
-                          size: 18,
+                        iconWithTextAndTo(
+                          tapShare,
+                          createArticleIcon(icon: Icons.share_outlined),
+                          thumbUpNumber,
                         ),
                       ],
                     ),
@@ -478,6 +504,36 @@ class douListBox extends StatelessWidget {
           ),
           SizedBox(
             height: 10,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Icon createArticleIcon({icon}) {
+    return Icon(
+      icon,
+      color: Colors.white54,
+      size: 18,
+    );
+  }
+
+  // annotation
+  GestureDetector iconWithTextAndTo(
+    Function onTap,
+    Icon iconObj,
+    String aboutNum,
+  ) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Row(
+        children: [
+          iconObj,
+          Text(
+            aboutNum,
+            style: TextStyle(
+              color: Colors.white54,
+            ),
           ),
         ],
       ),
